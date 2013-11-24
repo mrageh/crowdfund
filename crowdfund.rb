@@ -21,14 +21,34 @@ class Crowdfund
   end
 end
 
+class Project
+  attr_reader :name
+  def initialize(name)
+    @name = name.capitalize
+    @projects = []
+  end
+
+  def add_project(project)
+    @projects << project
+  end
+
+  def show_projects
+    puts "There are #{@projects.size} fundraising projects in #{name}:"
+    @projects.each do |project|
+      puts project
+      project.lost_funds
+      project.got_funds
+      project.got_funds
+      puts project
+    end
+  end
+end
 first_project = Crowdfund.new('xyz', 25, 75)
 second_project = Crowdfund.new('lmn', 500)
-projects = [first_project, second_project]
+third_project = Crowdfund.new('abc', 1000, 20000)
 
-projects.each do |project|
-  puts project
-end
-
-projects.each do |pro|
-  puts "#{pro.name} raised: $#{pro.fund}"
-end
+ruby_conf = Project.new('ruby_conf')
+ruby_conf.add_project(first_project)
+ruby_conf.add_project(second_project)
+ruby_conf.add_project(third_project)
+ruby_conf.show_projects
