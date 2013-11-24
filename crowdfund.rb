@@ -1,7 +1,11 @@
-project_name1 = "ABC"
-project_name2 = "LMN"
-project_name3 = "XYZ"
-funds = $1000
-puts "Project #{project_name1} has #{funds} in funding"
+def time
+  Time.new.strftime("as of %d/%m/%y")
+end
 
-puts "Projects: \n\t#{project_name1}\n\t#{project_name2}\n\t#{project_name3}"
+def fundraising_project(name, fund=0)
+  "Project #{name.upcase} has $#{fund} in funds as of #{time}"
+end
+puts fundraising_project("cour", 1000)
+puts fundraising_project("build", 1500)
+puts fundraising_project("salf")
+
