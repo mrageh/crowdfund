@@ -1,4 +1,5 @@
 class Crowdfund
+  attr_reader :goal, :name, :fund
   def initialize(name, fund=0, goal=3000)
     @name = name
     @fund = fund
@@ -18,16 +19,16 @@ class Crowdfund
     puts "Project #{@name.upcase} got more funds!"
     @fund += 25
   end
-
-
 end
 
 first_project = Crowdfund.new('xyz', 25, 75)
-puts first_project
 second_project = Crowdfund.new('lmn', 500)
-puts second_project
-second_project.lost_funds
-first_project.got_funds
+projects = [first_project, second_project]
 
-puts second_project
-puts first_project
+projects.each do |project|
+  puts project
+end
+
+projects.each do |pro|
+  puts "#{pro.name} raised: $#{pro.fund}"
+end
