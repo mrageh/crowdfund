@@ -23,6 +23,18 @@ class Project
     puts "Project #{@name.upcase} got more funds!"
     @fund += 25
   end
+
+  def expensive?
+    if fund >= 1000
+      true
+    else
+      false
+    end
+  end
+
+  def target?
+    fund >= goal
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME

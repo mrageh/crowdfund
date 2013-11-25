@@ -21,7 +21,8 @@ describe Project do
   it "decreases funds by 15 when funds are removed" do
     @project.lost_funds.should == (25 - 15)
   end
-  context "description" do
+
+  context "created with default value" do
     before do
       @project = Project.new('xyz')
     end
@@ -33,7 +34,43 @@ describe Project do
     it "has a default value of 3000 for target amount" do
       @project.goal.should == 3000
     end
-
   end
+
+  context "expensive value of project" do
+    before do
+      @project = Project.new('exp', 1000, 10000)
+    end
+
+    it "is a huge fund raising campaign" do
+      @project.should be_expensive
+    end
+  end
+
+  context "not expensive project" do
+    before do
+      @project = Project.new('chp', 999, 1000)
+    end
+
+    it "is not a cheap fund raising campaign" do
+      @project.should_not be_expensive
+    end
+  end
+
+  context "target amount has been reached" do
+    before do
+      @project = Project.new('finished', 1000, 1000)
+    end
+
+    it "the target funding amount has been reached" do
+      @project.should be_target
+    end
+
+    it "the target funding amount has been exceed" do
+      @project.got_funds
+      @project.should be_target
+    end
+  end
+
+
 
 end
