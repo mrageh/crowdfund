@@ -1,4 +1,4 @@
-require_relative 'project'
+require './project'
 
 describe Project do
   before do

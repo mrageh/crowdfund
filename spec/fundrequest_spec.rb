@@ -1,4 +1,4 @@
-require_relative 'fundrequest'
+require './fundrequest'
 
 describe FundRequest do
   before do
