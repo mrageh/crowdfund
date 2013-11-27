@@ -90,4 +90,20 @@ describe Project do
     @project.points.should == 225
   end
 
+  it "yields each found treasure and its total amount" do
+    @project.pledge_total(Pledge.new(:gold, 100))
+    @project.pledge_total(Pledge.new(:silver, 75))
+
+    yielded = []
+
+    @project.each_pledge_recieved do |pledge|
+      yielded << pledge
+    end
+
+    yielded.should == [
+      Pledge.new(:gold, 100),
+      Pledge.new(:silver, 75)
+    ]
+  end
+
 end

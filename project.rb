@@ -15,6 +15,12 @@ class Project
     puts "Project #{name} pledges: #{@pledges}"
   end
 
+  def each_pledge_recieved
+    @pledges.each do |name, amount|
+      yield Pledge.new(name, amount)
+    end
+  end
+
   def points
     @pledges.values.reduce(0, :+)
   end

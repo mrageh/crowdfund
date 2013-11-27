@@ -50,5 +50,12 @@ class FundRequest
     sorted_amount.each do |project|
       puts "#{project.name.ljust(20,'.')} $#{project.outstanding_funds}"
     end
+
+    @projects.each do |project|
+      puts "\n#{project.name}'s pledges:"
+      project.each_pledge_recieved do |pledge|
+        puts "$#{pledge.amount} in #{pledge.name} pledges"
+      end
+    end
   end
 end
