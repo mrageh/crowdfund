@@ -6,6 +6,10 @@ describe Project do
     @project = Project.new('xyz', 25, 75)
   end
 
+  it "has a capitalized name" do
+    @project.name.should == 'XYZ'
+  end
+
   it "has an initial target funding amount" do
     @project.fund.should == 25
   end

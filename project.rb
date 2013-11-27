@@ -1,7 +1,7 @@
 class Project
   attr_reader :goal, :name, :fund
   def initialize(name, fund=0, goal=3000)
-    @name = name
+    @name = name.upcase
     @fund = fund
     @goal = goal
   end
@@ -34,6 +34,10 @@ class Project
 
   def target?
     fund >= goal
+  end
+
+  def <=> (other_project)
+    other_project.outstanding_funds <=> outstanding_funds
   end
 end
 

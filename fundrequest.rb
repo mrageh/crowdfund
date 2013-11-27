@@ -5,7 +5,7 @@ class FundRequest
   attr_reader :name
 
   def initialize(name)
-    @name = name.capitalize
+    @name = name.upcase
     @projects = []
   end
 
@@ -13,10 +13,35 @@ class FundRequest
     @projects << project
   end
 
-  def show_projects
+  def show_projects(rounds)
     puts "There are #{@projects.size} fundraising projects in #{name}:"
-    @projects.each do |project|
-      FundingRound.round(project)
+    1.upto(rounds) do |round|
+      puts "\nFund raising event round #{round}:"
+      @projects.each do |project|
+        FundingRound.round(project)
+      end
+    end
+  end
+
+  def print_stats
+    fully_funded, under_funded = @projects.partition {|project| project.target?}
+    puts "#{name} Statistics For Event:"
+
+    puts "\n #{fully_funded.count} Fully Funded Projects:"
+    fully_funded.each do |fully_funded|
+      puts "#{fully_funded.name} reached its goal of $#{fully_funded}"
+    end
+
+    puts "\n #{under_funded.count} Under Funded Projects:"
+    under_funded.each do |under_funded|
+      puts "#{under_funded.name} did not reach its goal of $#{under_funded}"
+    end
+
+    puts "\nThese projects are far from their goal:"
+
+    sorted_amount = under_funded.sort
+    sorted_amount.each do |project|
+      puts "#{project.name.ljust(20,'.')} $#{project.outstanding_funds}"
     end
   end
 end

@@ -8,4 +8,5 @@ ruby_conf = FundRequest.new('ruby_conf')
 ruby_conf.add_project(first_project)
 ruby_conf.add_project(second_project)
 ruby_conf.add_project(third_project)
-ruby_conf.show_projects
+ruby_conf.show_projects(3)
+ruby_conf.print_stats
