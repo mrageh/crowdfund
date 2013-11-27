@@ -75,6 +75,19 @@ describe Project do
     end
   end
 
+  it "computes points as the sum of all treasure points" do
+    @project.points.should == 0
+    @project.pledge_total(Pledge.new(:bronze, 50))
 
+    @project.points.should == 50
+
+    @project.pledge_total(Pledge.new(:silver, 75))
+
+    @project.points.should == 125
+
+    @project.pledge_total(Pledge.new(:gold, 100))
+
+    @project.points.should == 225
+  end
 
 end

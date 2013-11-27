@@ -1,9 +1,22 @@
+require_relative 'pledge_list'
+
 class Project
   attr_reader :goal, :name, :fund
   def initialize(name, fund=0, goal=3000)
     @name = name.upcase
     @fund = fund
     @goal = goal
+    @pledges = Hash.new(0)
+  end
+
+  def pledge_total(pledge)
+    @pledges[pledge.name] += pledge.amount
+    puts "Project #{name} received a #{pledge.name} pledge worth $#{pledge.amount}"
+    puts "Project #{name} pledges: #{@pledges}"
+  end
+
+  def points
+    @pledges.values.reduce(0, :+)
   end
 
   def to_s

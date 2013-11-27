@@ -1,5 +1,6 @@
 require_relative 'project'
 require_relative 'funding_round'
+require_relative 'pledge_list'
 
 class FundRequest
   attr_reader :name
@@ -15,6 +16,12 @@ class FundRequest
 
   def show_projects(rounds)
     puts "There are #{@projects.size} fundraising projects in #{name}:"
+
+    pledges = PledgeList::PLEDGES
+    puts "\nThere are #{pledges.size} possible pledge amounts:"
+    pledges.each do |pledge|
+      puts "A #{pledge.name} pledge is worth $#{pledge.amount}"
+    end
     1.upto(rounds) do |round|
       puts "\nFund raising event round #{round}:"
       @projects.each do |project|

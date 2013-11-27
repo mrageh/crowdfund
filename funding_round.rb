@@ -1,5 +1,6 @@
 require_relative 'die'
 require_relative 'project'
+require_relative 'pledge_list'
 
 module FundingRound
 
@@ -10,6 +11,8 @@ module FundingRound
     elsif number_rolled % 2 > 0
       project.lost_funds
     end
+    pledge = PledgeList.random
+    project.pledge_total(pledge)
   end
 
 end
