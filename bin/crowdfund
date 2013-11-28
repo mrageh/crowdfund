@@ -1,11 +1,13 @@
-require_relative "fundrequest"
+#!/usr/bin/env ruby
+require_relative "../lib/crowdfund/fundrequest"
 
 first_project  = CrowdFund::Project.new('xyz', 25, 75)
 second_project = CrowdFund::Project.new('lmn', 500)
 third_project  = CrowdFund::Project.new('abc', 1000, 20000)
 
 ruby_conf = CrowdFund::FundRequest.new('ruby_conf')
-ruby_conf.load_projects(ARGV.shift || "projects.csv")
+default_project_file = File.join(File.dirname(__FILE__), 'projects.csv')
+ruby_conf.load_projects(ARGV.shift || default_project_file)
 
 loop do
   puts "How many rounds? ('quit' to exit)"
