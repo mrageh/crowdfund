@@ -1,7 +1,9 @@
 require_relative 'pledge_list'
-
+require_relative 'fundable'
 class Project
-  attr_reader :goal, :name, :fund
+  include Fundable
+  attr_accessor :goal, :fund
+  attr_reader :name
   def initialize(name, fund=0, goal=3000)
     @name = name.upcase
     @fund = fund
@@ -32,20 +34,6 @@ class Project
 
   def to_s
     "Project #{@name.upcase} has $#{@fund} in funding towards a goal of $#{@goal}"
-  end
-
-  def lost_funds
-    puts"Project #{@name.upcase} lost some funds!"
-    @fund -= 15
-  end
-
-  def outstanding_funds
-    @goal - @fund
-  end
-
-  def got_funds
-    puts "Project #{@name.upcase} got more funds!"
-    @fund += 25
   end
 
   def expensive?
