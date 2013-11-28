@@ -10,6 +10,38 @@ class FundRequest
     @projects = []
   end
 
+  #super refactoring
+  def funds_entry(project)
+    formatted_name = project.name.ljust(20, '.')
+    "#{formatted_name} got $#{project.fund} and had a goal of $#{project.goal}"
+  end
+
+  def save_projects_that_need_funding(to_file="need_funds.txt")
+    File.open(to_file, "w") do |file|
+      under_funded = @projects.select {|project| !project.target?}
+      file.puts "#{under_funded.count} Projects From #{name} Event That Need Funds:"
+      under_funded.each do |project|
+        file.puts funds_entry(project)
+      end
+    end
+  end
+
+  def save_fully_funded_projects(to_file="fully_funded")
+    File.open(to_file, "w") do |file|
+      fully_funded = @projects.select {|project| project.target?}
+      file.puts "#{fully_funded.count} Projects From #{name} Event Were Fully Funded:"
+      fully_funded.each do |project|
+        file.puts funds_entry(project)
+      end
+    end
+  end
+
+  def load_projects(from_file)
+    File.readlines(from_file).each do |line|
+      add_project(Project.from_csv(line))
+    end
+  end
+
   def add_project(project)
     @projects << project
   end
@@ -36,19 +68,19 @@ class FundRequest
 
     puts "\n #{fully_funded.count} Fully Funded Projects:"
     fully_funded.each do |fully_funded|
-      puts "#{fully_funded.name} reached its goal of $#{fully_funded}"
+      puts funds_entry(fully_funded)
     end
 
     puts "\n #{under_funded.count} Under Funded Projects:"
     under_funded.each do |under_funded|
-      puts "#{under_funded.name} did not reach its goal of $#{under_funded}"
+      puts funds_entry(under_funded)
     end
 
     puts "\nThese projects are far from their goal:"
 
     sorted_amount = under_funded.sort
     sorted_amount.each do |project|
-      puts "#{project.name.ljust(20,'.')} $#{project.outstanding_funds}"
+      puts funds_entry(project)
     end
 
     @projects.each do |project|

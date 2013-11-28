@@ -9,6 +9,11 @@ class Project
     @pledges = Hash.new(0)
   end
 
+  def self.from_csv(string)
+    name,fund,goal = string.split(",")
+    Project.new(name, Integer(fund), Integer(goal))
+  end
+
   def pledge_total(pledge)
     @pledges[pledge.name] += pledge.amount
     puts "Project #{name} received a #{pledge.name} pledge worth $#{pledge.amount}"

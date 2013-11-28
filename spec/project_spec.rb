@@ -6,6 +6,14 @@ describe Project do
     @project = Project.new('xyz', 25, 75)
   end
 
+  it "can be created from a CSV string" do
+    project = Project.from_csv("lol,50,1000")
+
+    project.name.should == 'LOL'
+    project.fund.should == 50
+    project.goal.should == 1000
+  end
+
   it "has a capitalized name" do
     @project.name.should == 'XYZ'
   end
