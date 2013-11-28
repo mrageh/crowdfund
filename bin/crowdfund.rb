@@ -1,10 +1,10 @@
 require_relative "fundrequest"
 
-first_project = Project.new('xyz', 25, 75)
-second_project = Project.new('lmn', 500)
-third_project = Project.new('abc', 1000, 20000)
+first_project  = CrowdFund::Project.new('xyz', 25, 75)
+second_project = CrowdFund::Project.new('lmn', 500)
+third_project  = CrowdFund::Project.new('abc', 1000, 20000)
 
-ruby_conf = FundRequest.new('ruby_conf')
+ruby_conf = CrowdFund::FundRequest.new('ruby_conf')
 ruby_conf.load_projects(ARGV.shift || "projects.csv")
 
 loop do
